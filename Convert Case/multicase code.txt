@@ -1,0 +1,118 @@
+Add-Type -AssemblyName PresentationFramework;
+$_style1 = '====================================================================================================';
+function caseMulti {
+    '• Clip Text';
+    (Get-Clipboard -Raw);
+    $_style1;
+
+    '• case of lower';
+    (Get-Clipboard -Raw).ToLower();
+    $_style1;
+
+    '• CASE OF UPPER';
+    (Get-Clipboard -Raw).ToUpper();
+    $_style1;
+
+    '• Case Of Capital Style #1';
+    (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower());
+    $_style1;
+
+    '• cASE oF cAPITAL sTYLE #2';
+    [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '\b\w', {param($letter) $letter.Value.ToLower()} );
+    $_style1;
+
+    '• CASe Of CAPITAl STYLe #3';
+    [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '\w\b', {param($letter) $letter.Value.ToLower()} );
+    $_style1;
+
+    '• CasE OF CapitaL StylE #4';
+    [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '(?!\w\b|\b\w)\w', {param($letter) $letter.Value.ToLower()} );
+    $_style1;
+
+    '• Case of Title';
+    [Regex]::Replace( (Get-Clipboard -Raw).ToLower(), '\b(?!(are|to|a|the|at|in|of|with|and|but|or)\b)\w', {param($letter) $letter.Value.ToUpper()} );
+    $_style1;
+
+    '• Case of sentence';
+    [Regex]::Replace( (Get-Clipboard -Raw).ToLower(), '^\w|^\s+\w|\n\s+\w|\n\w|[.]\w|[.]\s+\w', {param($letter) $letter.Value.ToUpper()} );
+    $_style1;
+
+    '• CaSe oF AlTeRnAtInG #1';
+    $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) {
+        $opr = ($Index - [int]( $Index / 2) * 2);
+        switch ($opr) {
+            0  {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;}
+            1  {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;}
+            -1 {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;}
+        }
+    } $res -join '';
+    $_style1;
+
+    '• cAsE Of aLtErNaTiNg #2';
+    $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) {
+        $opr = ($Index - [int]( $Index / 2) * 2);
+        switch ($opr) {
+            0  {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;}
+            1  {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;}
+            -1 {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;}
+        }
+    } $res -join '';
+    $_style1;
+
+    '• CasE oF SwAp';
+    $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) {
+        if ( [char](Get-Clipboard -Raw)[$Index] -ceq [char]::ToUpper((Get-Clipboard -Raw)[$Index]) ) {
+            [char]::ToLower( (Get-Clipboard -Raw)[$Index] );
+        } else {
+            [char]::ToUpper( (Get-Clipboard -Raw)[$Index] );
+        }
+    } $res -join '';
+    $_style1;
+
+    '• CasSE oF rANdom';
+    ([char[]](Get-Clipboard -Raw).ToLower() | ForEach-Object {
+        $char = $_;
+        switch (Get-Random 0, 1) {
+            0 {$char;}
+            1 {$char.ToString().ToUpper();}
+        }
+    }) -join '';
+    $_style1;
+
+    '• Case of Proper';
+    (Get-Clipboard -Raw) -replace ' +', ' ' -replace '(?<!.) ', '' -replace '(?<=[.])(?! )', ' ';
+    $_style1;
+
+    '• caseOfCamel';
+    [Regex]::Replace( ((Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', ''), '^\w|^\s+.|\n\s+\w|\n\w', {param($letter) $letter.Value.ToLower()} );
+    $_style1;
+
+    '• CaseOfPascal';
+    (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', '';
+    $_style1;
+
+    '• Case_Of_Snake_Style_#1';
+    (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).', '_' -replace '_+', '_' -replace '(?(?<!.)([\\_])|([\\_])(?!.))';
+    $_style1;
+
+    '• CASE_OF_SNAKE_STYLE_#2';
+    (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToUpper()) -replace '(?=\W).', '_' -replace '_+', '_' -replace '(?(?<!.)([\\_])|([\\_])(?!.))';
+    $_style1;
+
+    '• case-of-kebab';
+    ((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', '-' -replace '-+', '-' -replace '(?(?<!.)([\\-])|([\\-])(?!.))';
+    $_style1;
+
+    '• esreveR fo esaC';
+    [Regex]::Matches((Get-Clipboard -Raw), '.', 'RightToLeft').Value -join '';
+    $_style1;
+}
+
+if ( [string]::IsNullOrWhitespace((Get-Clipboard -Raw)) ) {
+        [System.Windows.MessageBox]::Show('Failed! There is no Clipboard Text Selected', '​', 'Ok', 'Error');
+    } else {
+        [System.Windows.MessageBox]::Show('Successful!', '​', 'Ok', 'Information');
+            (Get-Clipboard -Raw | Out-GridView -Title '​'), (caseMulti | Out-GridView -Title '​' -PassThru | Set-Clipboard -Verbose);
+        }
+
+Add-Type -AssemblyName PresentationFramework; $_style1 = '===================================================================================================='; function caseMulti { '• Clip Text'; (Get-Clipboard -Raw); $_style1; '• case of lower'; (Get-Clipboard -Raw).ToLower(); $_style1; '• CASE OF UPPER'; (Get-Clipboard -Raw).ToUpper(); $_style1; '• Case Of Capital Style #1'; (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()); $_style1; '• cASE oF cAPITAL sTYLE #2'; [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '\b\w', {param($letter) $letter.Value.ToLower()} ); $_style1; '• CASe Of CAPITAl STYLe #3'; [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '\w\b', {param($letter) $letter.Value.ToLower()} ); $_style1; '• CasE OF CapitaL StylE #4'; [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '(?!\w\b|\b\w)\w', {param($letter) $letter.Value.ToLower()} ); $_style1; '• Case of Title'; [Regex]::Replace( (Get-Clipboard -Raw).ToLower(), '\b(?!(are|to|a|the|at|in|of|with|and|but|or)\b)\w', {param($letter) $letter.Value.ToUpper()} ); $_style1; '• Case of sentence'; [Regex]::Replace( (Get-Clipboard -Raw).ToLower(), '^\w|^\s+\w|\n\s+\w|\n\w|[.]\w|[.]\s+\w', {param($letter) $letter.Value.ToUpper()} ); $_style1; '• CaSe oF AlTeRnAtInG #1'; $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) { $opr = ($Index - [int]( $Index / 2) * 2); switch ($opr) { 0 {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;} 1 {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;} -1 {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;} } } $res -join ''; $_style1; '• cAsE Of aLtErNaTiNg #2'; $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) { $opr = ($Index - [int]( $Index / 2) * 2); switch ($opr) { 0 {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;} 1 {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;} -1 {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;} } } $res -join ''; $_style1; '• CasE oF SwAp'; $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) { if ( [char](Get-Clipboard -Raw)[$Index] -ceq [char]::ToUpper((Get-Clipboard -Raw)[$Index]) ) { [char]::ToLower( (Get-Clipboard -Raw)[$Index] ); } else { [char]::ToUpper( (Get-Clipboard -Raw)[$Index] ); } } $res -join ''; $_style1; '• CasSE oF rANdom'; ([char[]](Get-Clipboard -Raw).ToLower() | ForEach-Object { $char = $_; switch (Get-Random 0, 1) { 0 {$char;} 1 {$char.ToString().ToUpper();} } }) -join ''; $_style1; '• Case of Proper'; (Get-Clipboard -Raw) -replace ' +', ' ' -replace '(?<!.) ', '' -replace '(?<=[.])(?! )', ' '; $_style1; '• caseOfCamel'; [Regex]::Replace( ((Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', ''), '^\w|^\s+.|\n\s+\w|\n\w', {param($letter) $letter.Value.ToLower()} ); $_style1; '• CaseOfPascal'; (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', ''; $_style1; '• Case_Of_Snake_Style_#1'; (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).', '_' -replace '_+', '_' -replace '(?(?<!.)([\\_])|([\\_])(?!.))'; $_style1; '• CASE_OF_SNAKE_STYLE_#2'; (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToUpper()) -replace '(?=\W).', '_' -replace '_+', '_' -replace '(?(?<!.)([\\_])|([\\_])(?!.))'; $_style1; '• case-of-kebab'; ((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', '-' -replace '-+', '-' -replace '(?(?<!.)([\\-])|([\\-])(?!.))'; $_style1; '• esreveR fo esaC'; [Regex]::Matches((Get-Clipboard -Raw), '.', 'RightToLeft').Value -join ''; $_style1; } if ( [string]::IsNullOrWhitespace((Get-Clipboard -Raw)) ) { [System.Windows.MessageBox]::Show('Failed! There is no Clipboard Text Selected', '​', 'Ok', 'Error'); } else { [System.Windows.MessageBox]::Show('Successful!', '​', 'Ok', 'Information'); (Get-Clipboard -Raw | Out-GridView -Title '​'), (caseMulti | Out-GridView -Title '​' -PassThru | Set-Clipboard -Verbose); }
