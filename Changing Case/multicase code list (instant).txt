@@ -1,0 +1,37 @@
+powershell (Get-Clipboard -Raw).ToLower() | Set-Clipboard -Verbose;
+
+powershell (Get-Clipboard -Raw).ToUpper() | Set-Clipboard -Verbose;
+
+powershell (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) | Set-Clipboard -Verbose;
+
+powershell [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '\b\w', {param($letter) $letter.Value.ToLower()} ) | Set-Clipboard -Verbose;
+
+powershell [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '\w\b', {param($letter) $letter.Value.ToLower()} ) | Set-Clipboard -Verbose;
+
+powershell [Regex]::Replace( (Get-Clipboard -Raw).ToUpper(), '(?!\w\b|\b\w)\w', {param($letter) $letter.Value.ToLower()} ) | Set-Clipboard -Verbose;
+
+powershell [Regex]::Replace( (Get-Clipboard -Raw).ToLower(), '\b(?!(are|to|a|the|at|in|of|with|and|but|or)\b)\w', {param($letter) $letter.Value.ToUpper()} ) | Set-Clipboard -Verbose;
+
+powershell [Regex]::Replace( (Get-Clipboard -Raw).ToLower(), '^\w|^\s+\w|\n\s+\w|\n\w|[.]\w|[.]\s+\w', {param($letter) $letter.Value.ToUpper()} ) | Set-Clipboard -Verbose;
+
+powershell $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) { $opr = ($Index - [int]( $Index / 2) * 2); switch ($opr) { 0 {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;} 1 {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;} -1 {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;} } } $res -join '';
+
+powershell $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) { $opr = ($Index - [int]( $Index / 2) * 2); switch ($opr) { 0 {([string](Get-Clipboard -Raw)[$Index]).ToLower(); break;} 1 {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;} -1 {([string](Get-Clipboard -Raw)[$Index]).ToUpper(); break;} } } $res -join '';
+
+powershell $res = foreach ($Index in 0..((Get-Clipboard -Raw).Length - 1)) { if ( [char](Get-Clipboard -Raw)[$Index] -ceq [char]::ToUpper((Get-Clipboard -Raw)[$Index]) ) { [char]::ToLower( (Get-Clipboard -Raw)[$Index] ); } else { [char]::ToUpper( (Get-Clipboard -Raw)[$Index] ); } } $res -join '';
+
+powershell ([char[]](Get-Clipboard -Raw).ToLower() | ForEach-Object { $char = $_; switch (Get-Random 0, 1) { 0 {$char;} 1 {$char.ToString().ToUpper();} } }) -join '' | Set-Clipboard -Verbose;
+
+powershell (Get-Clipboard -Raw) -replace ' +', ' ' -replace '(?<!.) ', '' -replace '(?<=[.])(?! )', ' ' | Set-Clipboard -Verbose;
+
+powershell [Regex]::Replace( ((Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', ''), '^\w|^\s+.|\n\s+\w|\n\w', {param($letter) $letter.Value.ToLower()} ); | Set-Clipboard -Verbose;
+
+powershell (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', '' | Set-Clipboard -Verbose;
+
+powershell (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).', '_' -replace '_+', '_' -replace '(?(?<!.)([\\_])|([\\_])(?!.))' | Set-Clipboard -Verbose;
+
+powershell (Get-Culture).TextInfo.ToTitleCase((Get-Clipboard -Raw).ToUpper()) -replace '(?=\W).', '_' -replace '_+', '_' -replace '(?(?<!.)([\\_])|([\\_])(?!.))' | Set-Clipboard -Verbose;
+
+powershell ((Get-Clipboard -Raw).ToLower()) -replace '(?=\W).|[\\_]', '-' -replace '-+', '-' -replace '(?(?<!.)([\\-])|([\\-])(?!.))' | Set-Clipboard -Verbose;
+
+powershell [Regex]::Matches((Get-Clipboard -Raw), '.', 'RightToLeft').Value -join '' | Set-Clipboard -Verbose;
