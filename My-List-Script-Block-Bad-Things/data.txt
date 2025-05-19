@@ -1,3 +1,5 @@
-! example.com
+! site example.com
 example.com##h1
 
+! site shinigami.ae / id.shinigami.asia
+id.shinigami.asia##.grid.grid-cols-1 > .bg-base-card
