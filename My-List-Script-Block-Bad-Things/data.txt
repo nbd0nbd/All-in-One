@@ -1,5 +1,37 @@
-! site example.com
-example.com##h1
+adblock.turtlecute.org/js/pagead.js
+adblock.turtlecute.org/js/widget/ads.js
+||blogspot.com^
+||kangalod.xyz^
+||komikcast.me^
+||komikcast02.com/wp-content/uploads/2025^
+||profilestorage.shngm.id^
+||googleusercontent.com^
+||cdnfgo.xyz^
 
-! site shinigami.ae / id.shinigami.asia
-id.shinigami.asia##.grid.grid-cols-1 > .bg-base-card
+||adcolony.com^
+||amazonaws.com^
+||apple.com^
+||byteoversea.com^
+||doubleclick.net^
+||googleadservices.com^
+||googleanalytics.com^
+||google-analytics.com^
+||googlesyndication.com^
+||googletagmanager.com^
+||hicloud.com^
+||icloud.com^
+||media.net^
+||mzstatic.com^
+||oneplus.cn^
+||oneplus.net^
+||oppomobile.com^
+||realme.com^
+||realmemobile.com^
+||samsung.com^
+||samsungads.com^
+||samsunghealthcn.com^
+
+analytics.google.com
+
+||facebook.com^$3p,frame,redirect=click2load.html
+||google.com^$3p,frame,redirect=click2load.html
