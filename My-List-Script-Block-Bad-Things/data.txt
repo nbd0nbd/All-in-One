@@ -8,7 +8,7 @@ adblock.turtlecute.org/js/widget/ads.js
 ||blogspot.com^
 ||kangalod.xyz^
 ||komikcast.me^
-||komikcast02.com/wp-content/uploads/2025^
+||komikcast02.com^*.gif
 ||profilestorage.shngm.id^
 ||googleusercontent.com^
 ||cdnfgo.xyz^
