@@ -38,7 +38,7 @@ adblock.turtlecute.org/js/widget/ads.js
 ||samsunghealthcn.com^
 ||tiktok.com^
 ||unity3d.com^
-||xiomi.com^
+||xiaomi.com^
 ||yandex.net^
 ||yandex.ru^
 ||yahoo.com^
