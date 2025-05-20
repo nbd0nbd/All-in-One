@@ -42,5 +42,5 @@ analytics.google.com
 
 
 ||facebook.com^$3p,frame,redirect=click2load.html
-||tiktok.com^
+||tiktok.com^$3p,frame,redirect=click2load.html
 ||google.com^$3p,frame,redirect=click2load.html
