@@ -1,4 +1,6 @@
-1
+! Title: Block Bad Things
+
+
 adblock.turtlecute.org/js/pagead.js
 adblock.turtlecute.org/js/widget/ads.js
 
