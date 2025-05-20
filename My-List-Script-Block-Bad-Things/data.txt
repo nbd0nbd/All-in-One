@@ -33,14 +33,17 @@ adblock.turtlecute.org/js/widget/ads.js
 ||samsung.com^
 ||samsungads.com^
 ||samsunghealthcn.com^
+||tiktok.com^
 ||unity3d.com^
-||yandex.com^
+||yandex.net^
+||yandex.ru^
 ||yahoo.com^
 
 
 analytics.google.com
 
 
-||facebook.com^$3p,frame,redirect=click2load.html
-||tiktok.com^$3p,frame,redirect=click2load.html
+||facebook.com^
+!||facebook.com^$3p,frame,redirect=click2load.html
+!||google.com^
 ||google.com^$3p,frame,redirect=click2load.html
