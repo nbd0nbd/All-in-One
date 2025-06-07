@@ -11,12 +11,17 @@ adblock.turtlecute.org/js/widget/ads.js
 ||komikcast.me^
 ||komikcast02.com^*.gif
 ||profilestorage.shngm.id^
-||googleusercontent.com^
 ||cdnfgo.xyz^
+||shngm.id^*.gif
+||.shinigami.asia^*ChNoHcHn.css
+app.shinigami.asia##.grid .bg-base-card
+app.shinigami.asia##.grid > a > img
 
 
 ||adcolony.com^
 ||amazonaws.com^
+||amazonaws.com^$all
+||.amazonaws.com^
 ||apple.com^
 ||byteoversea.com^
 ||doubleclick.net^
@@ -25,6 +30,7 @@ adblock.turtlecute.org/js/widget/ads.js
 ||google-analytics.com^
 ||googlesyndication.com^
 ||googletagmanager.com^
+||googleusercontent.com^
 ||hicloud.com^
 ||histats.com^
 ||icloud.com^
